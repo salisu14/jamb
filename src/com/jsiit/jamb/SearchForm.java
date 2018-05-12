@@ -47,6 +47,7 @@ public class SearchForm extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        genderList.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jScrollPane1.setViewportView(genderList);
 
         btnSearch.setText("Search");
@@ -91,7 +92,7 @@ public class SearchForm extends javax.swing.JFrame {
         List<Student> students = StudentDB.filter(list, (Student s)-> value.equalsIgnoreCase(s.getGender()));
         DefaultListModel<String> model = new DefaultListModel();
         students.stream().forEach((student) -> {
-            model.addElement(student.getJambNo() + " " + student.getFirstName() + " " + student.getLastName());
+            model.addElement(student.getJambNo() + "-" + student.getFirstName() + " " + student.getLastName());
      });
         genderList.setModel(model);
     }//GEN-LAST:event_btnSearchActionPerformed
