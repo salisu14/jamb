@@ -189,7 +189,7 @@ public class StudentManagerFrame extends javax.swing.JFrame {
             Student student = studentTableModel.getStudent(selectedRow);
             int ask = JOptionPane.showConfirmDialog(this, "Are you sure you want delete "
                     + student.getFirstName() + " " + student.getLastName() + " from the database?",
-                    "Confirm delete", JOptionPane.YES_NO_OPTION);
+                    "Confirm delete", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE );
             if (ask == JOptionPane.YES_OPTION) {
                 try {
                     StudentDB.delete(student);
@@ -211,7 +211,6 @@ public class StudentManagerFrame extends javax.swing.JFrame {
         try {
             ArrayList<Object[]> dataList = exporter.getTableData();
             if (dataList != null && dataList.size() > 0) {
-
                 exporter.doExport(dataList);
                 JOptionPane.showMessageDialog(this, "Records exported to excel sheet.",
                         "Task completed!", JOptionPane.INFORMATION_MESSAGE);
@@ -226,7 +225,7 @@ public class StudentManagerFrame extends javax.swing.JFrame {
 
     private void doImportButton() {
         JOptionPane.showMessageDialog(this, "This feature has not been implemented yet",
-                "Not yet implemented", JOptionPane.ERROR_MESSAGE);
+                "Not yet implemented", JOptionPane.INFORMATION_MESSAGE);
     }
 
     private void doSearchButton() {
