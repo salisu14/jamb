@@ -11,6 +11,8 @@ import com.jsiit.util.DBException;
 import com.jsiit.util.ExcelExporter;
 
 import java.awt.BorderLayout;
+import java.awt.print.PrinterException;
+import java.text.MessageFormat;
 import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -33,12 +35,9 @@ public class StudentManagerFrame extends javax.swing.JFrame {
      * Creates new form StudentManagerFrame
      */
     public StudentManagerFrame() {
-
         add(buildButtonPanel(), BorderLayout.NORTH);
         studentTable = buildStudentTable();
         add(new JScrollPane(studentTable), BorderLayout.CENTER);
-        //this.setVisible(true);
-
     }
 
     private JPanel buildButtonPanel() {
@@ -66,19 +65,19 @@ public class StudentManagerFrame extends javax.swing.JFrame {
         searchButton.addActionListener((ActionEvent) -> {
             doSearchButton();
         });
-        panel.add(deleteButton);
+        panel.add(searchButton);
 
         JButton exportButton = new JButton("Export to Excel");
         exportButton.addActionListener((ActionEvent) -> {
-                doExportButton();
+            doExportButton();
         });
         panel.add(exportButton);
 
-        JButton importButton = new JButton("Import from Excel");
-        importButton.addActionListener((ActionEvent) -> {
-            doImportButton();
+        JButton printButton = new JButton("Print");
+        printButton.addActionListener((ActionEvent) -> {
+            doPrintButton();
         });
-        panel.add(importButton);
+        panel.add(printButton);
 
         return panel;
     }
@@ -189,7 +188,7 @@ public class StudentManagerFrame extends javax.swing.JFrame {
             Student student = studentTableModel.getStudent(selectedRow);
             int ask = JOptionPane.showConfirmDialog(this, "Are you sure you want delete "
                     + student.getFirstName() + " " + student.getLastName() + " from the database?",
-                    "Confirm delete", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE );
+                    "Confirm delete", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
             if (ask == JOptionPane.YES_OPTION) {
                 try {
                     StudentDB.delete(student);
@@ -223,9 +222,17 @@ public class StudentManagerFrame extends javax.swing.JFrame {
         }
     }
 
-    private void doImportButton() {
-        JOptionPane.showMessageDialog(this, "This feature has not been implemented yet",
-                "Not yet implemented", JOptionPane.INFORMATION_MESSAGE);
+    private void doPrintButton() {
+        JTable table = new JTable(studentTableModel);
+        MessageFormat header = new MessageFormat("Jigawa State Institute of IT, Kazaure \n "
+                + "Department of Computer Science \n "
+                + "JAMB Admission List {1, date, short}");
+        MessageFormat footer = new MessageFormat("{0, number, integer}");
+        try {
+            table.print(JTable.PrintMode.NORMAL, header, footer);
+        } catch (PrinterException e) {
+            System.err.format("%s%n", e);
+        }
     }
 
     private void doSearchButton() {
