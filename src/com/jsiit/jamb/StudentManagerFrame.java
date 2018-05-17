@@ -223,13 +223,13 @@ public class StudentManagerFrame extends javax.swing.JFrame {
     }
 
     private void doPrintButton() {
-        JTable table = new JTable(studentTableModel);
+        
         MessageFormat header = new MessageFormat("Jigawa State Institute of IT, Kazaure \n "
                 + "Department of Computer Science \n "
                 + "JAMB Admission List {1, date, short}");
         MessageFormat footer = new MessageFormat("{0, number, integer}");
         try {
-            table.print(JTable.PrintMode.NORMAL, header, footer);
+            studentTable.print(JTable.PrintMode.NORMAL, header, footer);
         } catch (PrinterException e) {
             System.err.format("%s%n", e);
         }
