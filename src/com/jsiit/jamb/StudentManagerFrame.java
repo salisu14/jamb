@@ -229,7 +229,7 @@ public class StudentManagerFrame extends javax.swing.JFrame {
                 + "JAMB Admission List {1, date, short}");
         MessageFormat footer = new MessageFormat("{0, number, integer}");
         try {
-            studentTable.print(JTable.PrintMode.NORMAL, header, footer);
+            studentTable.print(JTable.PrintMode.FIT_WIDTH, header, footer);
         } catch (PrinterException e) {
             System.err.format("%s%n", e);
         }
