@@ -19,7 +19,7 @@ public enum Department {
     
     /**
      * Returns a meaningful <code>String</code> that represents the departments 
-     * @return A <code>String</code>
+     * @return A <code>String</code> for the departments
      */
     @Override
     public String toString() {
