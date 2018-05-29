@@ -18,9 +18,15 @@ import java.util.function.Predicate;
 /**
  *
  * @author salisu14
+ * @version 1.0.0
  */
 public class StudentDB {
 
+    /**
+     *
+     * @return a list of all students in the database
+     * @throws DBException
+     */
     public static List<Student> getStudents() throws DBException {
         List<Student> students = new ArrayList<>();
         String sql = "SELECT * FROM student ORDER BY rg_aggregate DESC";
@@ -37,6 +43,13 @@ public class StudentDB {
         }
     }
 
+    /**
+     * Sets the student data to the specified <code>ResultSet</code>
+     *
+     * @param rs A <code>ResultSet</code> for the student data
+     * @return a <code>ResultSet</code> representing the data of the student
+     * @throws SQLException
+     */
     private static Student getStudentFromResultSet(final ResultSet rs) throws SQLException {
         String jambNo = rs.getString("jambno");
         String fName = rs.getString("firstname");
@@ -62,6 +75,13 @@ public class StudentDB {
         return s;
     }
 
+    /**
+     * Sets the jamb number to the specified <code>String</code>
+     *
+     * @param jambNo Returns a <code>Student</code> object
+     * @return a <code>Student</code> for the student
+     * @throws DBException
+     */
     public static Student getStudent(String jambNo) throws DBException {
         String sql = "SELECT * FROM student WHERE jambNo = ?";
         Connection connection = DBUtil.getConnection();
@@ -81,7 +101,11 @@ public class StudentDB {
             throw new DBException(e.toString());
         }
     }
-
+   /**
+    * Add a new <code>Student</code> object
+    * @param student 
+    * @throws DBException 
+    */
     public static void add(Student student) throws DBException {
         String sql = "INSERT INTO student(jambno,firstname,lastName,middle,gender,"
                 + "state_name, rg_aggregate,course,lga)  "
@@ -102,7 +126,11 @@ public class StudentDB {
             throw new DBException(ex.toString());
         }
     }
-
+    /**
+     * Update a <code>Student</code> object
+     * @param student
+     * @throws DBException 
+     */
     public static void update(Student student) throws DBException {
         String sql = "UPDATE student SET "
                 + "jambno = ?, "
@@ -132,7 +160,11 @@ public class StudentDB {
             throw new DBException(ex.toString());
         }
     }
-
+   /**
+    * Deletes the specified <code>Student</code> object
+    * @param student
+    * @throws DBException 
+    */
     public static void delete(Student student) throws DBException {
         String sql = "DELETE FROM student "
                 + "WHERE jambno = ?";
@@ -144,7 +176,13 @@ public class StudentDB {
             throw new DBException(ex.toString());
         }
     }
-
+/**
+ * A generic method for filtering using different criteria
+ * @param <T>
+ * @param list
+ * @param p
+ * @return a <code>List&lt;T&gt;></code> for the given T
+ */
     public static <T> List<T> filter(List<T> list, Predicate<T> p) {
         List<T> result = new ArrayList<>();
         for (T e : list) {
