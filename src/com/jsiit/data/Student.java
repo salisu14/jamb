@@ -5,10 +5,11 @@
  */
 package com.jsiit.data;
 
-import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
 /**
+ * The <code>Student</code> class that represents a student and is used by the
+ * <code>StudentDB</code> and <code>StudentManagerFrame</code> classes.
  *
  * @author salisu14
  */
@@ -26,9 +27,32 @@ public class Student {
 
     private PropertyChangeSupport pcs = new PropertyChangeSupport(this);
 
+    /**
+     *Creates a <code>Student</code> with default values.
+     */
     public Student() {
+        jambNo = "";
+        firstName = "";
+        middle = "";
+        lastName = "";
+        gender = "Male";
+        state = "";
+        aggregate = 0;
+        courseName = "";
+        localGovernment = "";
     }
-
+    /**
+     * Create a <code>Student</code> with the following parameters:
+     * @param jambNo
+     * @param firstName
+     * @param middle
+     * @param lastName
+     * @param gender
+     * @param state
+     * @param aggregate
+     * @param courseName
+     * @param localGovernment 
+     */
     public Student(String jambNo, String firstName, String middle, String lastName,
             String gender, String state, int aggregate, String courseName,
             String localGovernment) {
@@ -44,70 +68,82 @@ public class Student {
     }
 
     /**
-     * @return the jambNo
+     * Returns a <code>String</code> that represents the student Jamb number
+     * @return jambNo A <code>String</code> for the Jamb number
      */
     public String getJambNo() {
         return jambNo;
     }
 
     /**
-     * @param jambNo the jambNo to set
+     * Sets the jamb number to the specified <code>String</code>
+     * @param jambNo A <code>String</code> for the specified jambNo
      */
     public void setJambNo(String jambNo) {
         this.jambNo = jambNo;
     }
 
     /**
-     * @return the firstName
+     * Return a <code>String</code> representing the student first name
+     * @return firstName A <code>String</code> for the first name.
      */
     public String getFirstName() {
         return firstName;
     }
 
     /**
-     * @param firstName the firstName to set
+     * Sets the first name with the specified <code>String</code>
+     * @param firstName A <code>String</code> for the student first name.
      */
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
 
     /**
-     * @return the middle
+     * Return a <code>String</code> for the student middle name
+     * @return middle A <code>String</code> for the student's middle name
      */
     public String getMiddle() {
         return middle;
     }
 
     /**
-     * @param middle the middle to set
+     * Sets the middle name to the specified <code>String</code>
+     * @param middle A <code>String</code> for the middle name.
      */
     public void setMiddle(String middle) {
         this.middle = middle;
     }
 
     /**
-     * @return the lastName
+     * Returns a <code>String</code> for the student's last name
+     * @return lastName A <code>String</code> for the last name
      */
     public String getLastName() {
         return lastName;
     }
 
     /**
-     * @param lastName the lastName to set
+     * Sets the last name to the specified <code>String</code>
+     * @param lastName A <code>String</code> for the last name.
      */
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
 
     /**
-     * @return the gender
+     * Returns a <code>String</code> for the student's gender
+     * @return gender A <code>String</code> for the gender
+     * This method return a <b>Male</b> string if the gender is null.
      */
     public String getGender() {
         return (gender == null) ? "Male" : this.gender;
     }
 
     /**
-     * @param newGender the gender to set
+     * Sets the gender for the specified <code>String</code>
+     * and fire a change property event
+     * @param newGender A <code>String</code> for the student gender.
      */
     public void setGender(String newGender) {
         String oldGender = this.gender;
@@ -117,27 +153,31 @@ public class Student {
     }
 
     /**
-     * @return the state
+     * Returns a <code>String</code> that represents the student's state of origin
+     * @return state A <code>String</code> for the state.
      */
     public String getState() {
         return state;
     }
 
     /**
-     * @param state the state to set
+     * Sets the state to the specified <code>String</code>
+     * @param state A <code>String</code> for the student state.
      */
     public void setState(String state) {
         this.state = state;
     }
 
     /**
-     * @return the aggregate
+     * Returns an <code>int</code> that represents the student's total score.
+     * @return aggregate An <code>int</code> for the student's jamb aggregate.
      */
     public int getAggregate() {
         return aggregate;
     }
 
     /**
+     * Sets the aggregate to the specified <code>int</code>
      * @param aggregate the aggregate to set
      */
     public void setAggregate(int aggregate) {
@@ -145,20 +185,24 @@ public class Student {
     }
 
     /**
-     * @return the courseName
+     * Returns a <code>String</code> that represents the course that the student offers. 
+     * @return courseName A <code>String</code> for the course name
      */
     public String getCourseName() {
         return courseName;
     }
 
     /**
-     * @param courseName the courseName to set
+     * Sets the course name to the specified <code>String</code>
+     * @param courseName A <code>String</code> for the student course name.
      */
     public void setCourseName(String courseName) {
         this.courseName = courseName;
     }
 
     /**
+     * Returns a <code>String</code> that represents the students local government
+     * of origin
      * @return the localGovernment
      */
     public String getLocalGovernment() {
@@ -166,18 +210,11 @@ public class Student {
     }
 
     /**
-     * @param localGovernment the localGovernment to set
+     * Sets the local government to the specified <code>String</code>
+     * @param localGovernment A <code>String</code> for the local government
      */
     public void setLocalGovernment(String localGovernment) {
         this.localGovernment = localGovernment;
-    }
-
-    public void addPropertyChangeListener(PropertyChangeListener listener) {
-        pcs.addPropertyChangeListener(listener);
-    }
-
-    public void removePropertyChangeListener(PropertyChangeListener listener) {
-        pcs.removePropertyChangeListener(listener);
     }
 
     @Override
